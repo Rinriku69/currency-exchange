@@ -66,6 +66,18 @@ export class Currency {
       }, {
         currencyCode: 'THB',
         rate: 31.07
+      }, {
+        currencyCode: 'EUR',
+        rate: 0.85
+      }, {
+        currencyCode: 'CNY',
+        rate: 7.03
+      }, {
+        currencyCode: 'KRW',
+        rate: 1442.33
+      }, {
+        currencyCode: 'SGD',
+        rate: 1.28
       }])
     }
   }

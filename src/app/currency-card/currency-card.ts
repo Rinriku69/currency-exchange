@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { DashBoard } from '../../model/dashboard';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-currency-card',
-  imports: [],
+  imports: [DecimalPipe],
   templateUrl: './currency-card.html',
   styleUrl: './currency-card.scss',
 })
