@@ -1,0 +1,10 @@
+<h1 class="app-title">Live Dash Board</h1>
+@if(isPolling()){
+<h2>Live Status: 🟢Active</h2>
+<button (click)="LiveSwitch(false)" class="app-switch">Turn Off</button>
+}@else {
+<h2>Live Status: 🔴Inactive</h2>
+<button (click)="LiveSwitch(true)" class="app-switch">Turn On</button>
+} @for(currency of dashboard() ; track currency.rate){
+<app-currency-card [currency]="currency"></app-currency-card>
+}
