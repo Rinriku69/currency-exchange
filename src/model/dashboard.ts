@@ -1,4 +1,5 @@
 export interface DashBoard {
-    currency: string;
-    rate: number
+    currencyCode: string;
+    rate: number;
+    trend?: 'up' | 'down' | 'same'
 }
