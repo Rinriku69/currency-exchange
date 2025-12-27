@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DashBoard } from '../model/dashboard';
-import { BehaviorSubject, Observable, pairwise, map } from 'rxjs';
+import { BehaviorSubject, Observable, pairwise, map, switchMap, timer, EMPTY, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -8,29 +8,6 @@ import { BehaviorSubject, Observable, pairwise, map } from 'rxjs';
 export class Currency {
   private CurrenciesState = new BehaviorSubject<DashBoard[]>([]);
   CurrentCurrencies$ = this.CurrenciesState.asObservable();
-  /* CurrentCurrenciesWithTrend$ = this.CurrentCurrencies$.pipe(
-    pairwise(),
-    map(([prev, curr]) => {
-      return curr.map(currency => {
-        const old = prev.find(p => p.currencyCode === currency.currencyCode);
-
-        if (!old) {
-          return { ...currency, trend: 'same' };
-        }
-
-        let trend: 'up' | 'down' | 'same' = 'same';
-
-        if (currency.rate > old.rate) trend = 'up';
-        else if (currency.rate < old.rate) trend = 'down';
-
-        return {
-          ...currency,
-          trend
-        };
-      });
-    })
-  ); */
-
   CurrentCurrenciesWithTrend$ = this.CurrentCurrencies$.pipe(
     pairwise(),
     map(([prev, curr]): DashBoard[] => {
@@ -53,7 +30,25 @@ export class Currency {
         };
       })
     })
-  )
+  );
+  private pollingActive$ = new BehaviorSubject<boolean>(false);
+
+  /* constructor() {
+    this.pollingActive$.pipe(
+      switchMap(isActive => isActive ? timer(0, 5000) : EMPTY)
+    ).subscribe(() => {
+      this.RandomRate();
+    });
+  } */
+
+  updates$ = this.pollingActive$.pipe(
+    switchMap(active => active ? timer(0, 5000) : EMPTY),
+    tap(() => this.RandomRate()) // Side effect: สั่งคำนวณเลข
+  );
+
+  setPolling(isActive: boolean) {
+    this.pollingActive$.next(isActive);
+  }
 
   private trendRNG() {
     return Math.round(Math.random())
