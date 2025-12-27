@@ -43,7 +43,7 @@ export class Currency {
 
   updates$ = this.pollingActive$.pipe(
     switchMap(active => active ? timer(1000, 5000) : EMPTY),
-    tap(() => this.RandomRate()) // Side effect: สั่งคำนวณเลข
+    tap(() => this.RandomRate())
   );
 
   setPolling(isActive: boolean) {
