@@ -8,5 +8,8 @@
   font-size: 15px;
   margin-left: 10px;
   font-weight: bold;
-  
+  &:active {
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
 }
