@@ -17,7 +17,7 @@ export class Converter {
     currnecy.currencyCode
   )
   inputUnit = signal('JPY')
-  outputUnit = signal('THB')
+  outputUnit = signal('USD')
   inputValue = signal(0)
   outputCode: Signal<string[]> = computed(() => {
     return this.inputCode
@@ -30,16 +30,15 @@ export class Converter {
     })
 
   }
-  inputUnitChange(unit: string) {
-    this.inputUnit.set(unit)
+  UnitChange(inputUnit: string, outputUnit: string) {
+    this.inputUnit.set(inputUnit)
+    this.outputUnit.set(outputUnit)
 
   }
-  outputUnitChange(unit: string) {
-    this.outputUnit.set(unit)
-  }
+
   inputValueChange(value: number) {
     this.inputValue.set(Number.isNaN(value) ? 0 : value)
-    console.log(this.outputValue())
+    console.log(this.outputUnit())
   }
 
 

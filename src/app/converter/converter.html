@@ -5,7 +5,7 @@
       From <br />
       <input type="number" (keyup)="inputValueChange($event.target.valueAsNumber)" />
     </label>
-    <select #sel (change)="inputUnitChange(sel.value)">
+    <select #sel (change)="UnitChange(sel.value, outsel.value)">
       @for (item of inputCode; track item) {
       <option [value]="item">{{ item }}</option>
       }
@@ -14,9 +14,9 @@
   <div class="app-convert-output">
     To <br />
     <span class="app-converted">{{ outputValue() }}</span>
-    <select #outsel (change)="outputUnitChange(outsel.value)">
+    <select #outsel (change)="UnitChange(sel.value, outsel.value)">
       @for (item of outputCode(); track item) {
-      <option [selected]="($index == 1 || $index == 0) && item != inputUnit()">{{ item }}</option>
+      <option [selected]="$index == 6">{{ item }}</option>
       }
     </select>
   </div>
