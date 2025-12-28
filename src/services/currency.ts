@@ -39,12 +39,14 @@ export class Currency {
   ]).pipe(map(([currentCurr, toCon]) => {
     const inputValue = toCon.value
 
-    const fromRate = toCon.from === 'USD'
-      ? 1
+    const fromRate = toCon.from === 'JPY'
+      ? currentCurr.find(curr => {
+        return curr.currencyCode === 'JPY'
+      })?.rate
       : currentCurr.find(curr => {
         return curr.currencyCode === toCon.from
       })?.rate;
-
+    
     const toRate = toCon.to === 'USD'
       ? 1
       : currentCurr.find(curr => { return curr.currencyCode === toCon.to })?.rate;
@@ -52,7 +54,7 @@ export class Currency {
     if (fromRate == null || toRate == null) {
       return 0;
     }
-
+    
     return (inputValue / fromRate) * toRate
 
   }))
