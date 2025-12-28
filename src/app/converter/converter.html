@@ -1,0 +1,15 @@
+<h1 class="app-title">Currency Converter</h1>
+<div class="app-converter-box">
+  <div class="app-user-input">
+    <label>
+      From <br />
+      <input type="number" (change)="($event.target.valueAsNumber)" />
+    </label>
+  </div>
+  <div class="app-convert-output">
+    <h3 class="app-converted">0</h3>
+    <select>
+      <option>1</option>
+    </select>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+.app-converter-box {
+  display: flex;
+  align-items: center;
+  gap: 30%;
+  border: 1px solid black;
+  padding-left: 10%;
+  padding-bottom: 10px;
+}
+
+.app-user-input,
+.app-convert-output {
+  flex: 1;
+}
+
+.app-title {
+  text-align: center;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
