@@ -3,13 +3,21 @@
   <div class="app-user-input">
     <label>
       From <br />
-      <input type="number" (change)="($event.target.valueAsNumber)" />
+      <input type="number" (change)="inputValueChange($event.target.valueAsNumber)" />
     </label>
+    <select #sel (change)="inputUnitChange(sel.value)">
+      @for (item of inputCode; track item) {
+      <option [value]="item">{{ item }}</option>
+      }
+    </select>
   </div>
   <div class="app-convert-output">
-    <h3 class="app-converted">0</h3>
-    <select>
-      <option>1</option>
+    To <br />
+    <span class="app-converted">{{ convertedValue() }}</span>
+    <select #outsel (change)="outputUnitChange(outsel.value)">
+      @for (item of outputCode(); track item) {
+      <option [selected]="($index == 1 || $index == 0) && item != inputUnit()">{{ item }}</option>
+      }
     </select>
   </div>
 </div>
