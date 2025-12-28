@@ -23,7 +23,7 @@ export class Converter {
     return this.inputCode
   })
   convertedValue = toSignal(this.currencyState.convertedValue$, { initialValue: 0 })
-
+  outputValue = this.convertedValue() ? this.convertedValue : signal(0)
   constructor() {
     effect(() => {
       this.currencyState.toConvert$.next({ value: this.inputValue(), from: this.inputUnit(), to: this.outputUnit() })
@@ -38,8 +38,8 @@ export class Converter {
     this.outputUnit.set(unit)
   }
   inputValueChange(value: number) {
-    this.inputValue.set(value)
-
+    this.inputValue.set(Number.isNaN(value) ? 0 : value)
+    console.log(this.outputValue())
   }
 
 
