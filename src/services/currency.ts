@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DashBoard } from '../model/dashboard';
-import { BehaviorSubject, Observable, pairwise, map, switchMap, timer, EMPTY, tap } from 'rxjs';
+import { BehaviorSubject, Observable, pairwise, map, switchMap, timer, EMPTY, tap, filter, of, combineLatest } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -32,7 +32,30 @@ export class Currency {
     })
   );
   private pollingActive$ = new BehaviorSubject<boolean>(false);
+  toConvert$ = new BehaviorSubject<{ value: number, from: string, to: string }>({ value: 1, from: 'JPY', to: 'USD' })
 
+  convertedValue$ = combineLatest([this.CurrentCurrencies$,
+  this.toConvert$
+  ]).pipe(map(([currentCurr, toCon]) => {
+    const inputValue = toCon.value
+
+    const fromRate = toCon.from === 'USD'
+      ? 1
+      : currentCurr.find(curr => {
+        return curr.currencyCode === toCon.from
+      })?.rate;
+
+    const toRate = toCon.to === 'USD'
+      ? 1
+      : currentCurr.find(curr => { return curr.currencyCode === toCon.to })?.rate;
+
+    if (fromRate == null || toRate == null) {
+      return 0;
+    }
+
+    return (inputValue / fromRate) * toRate
+
+  }))
   /* constructor() {
     this.pollingActive$.pipe(
       switchMap(isActive => isActive ? timer(0, 5000) : EMPTY)
@@ -78,25 +101,33 @@ export class Currency {
       }, {
         currencyCode: 'SGD',
         rate: 1.28
+      }, {
+        currencyCode: 'USD',
+        rate: 1
       }])
     }
   }
 
   RandomRate() {
     const old_data = this.CurrenciesState.value;
-    const new_data = old_data.map(currency => {
-      const trend = this.trendRNG()
-      const value = this.valueRNG()
+    const new_data = old_data.filter(curr =>
+      curr.currencyCode !== 'USD'
+    ).
+      map(currency => {
+        const trend = this.trendRNG()
+        const value = this.valueRNG()
 
-      return {
-        ...currency,
-        rate: trend === 1 ? currency.rate + value
-          : currency.rate - value
-      }
-    })
+        return {
+          ...currency,
+          rate: trend === 1 ? currency.rate + value
+            : currency.rate - value
+        }
+      })
 
     this.CurrenciesState.next(new_data)
   }
+
+
 
 
 }
