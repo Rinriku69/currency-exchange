@@ -46,7 +46,7 @@ export class Currency {
       : currentCurr.find(curr => {
         return curr.currencyCode === toCon.from
       })?.rate;
-    
+
     const toRate = toCon.to === 'USD'
       ? 1
       : currentCurr.find(curr => { return curr.currencyCode === toCon.to })?.rate;
@@ -54,7 +54,7 @@ export class Currency {
     if (fromRate == null || toRate == null) {
       return 0;
     }
-    
+
     return (inputValue / fromRate) * toRate
 
   }))
@@ -112,12 +112,14 @@ export class Currency {
 
   RandomRate() {
     const old_data = this.CurrenciesState.value;
-    const new_data = old_data.filter(curr =>
-      curr.currencyCode !== 'USD'
-    ).
+    const new_data = old_data.
       map(currency => {
         const trend = this.trendRNG()
         const value = this.valueRNG()
+
+        if (currency.currencyCode == 'USD') {
+          return currency
+        }
 
         return {
           ...currency,

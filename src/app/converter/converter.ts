@@ -38,7 +38,6 @@ export class Converter {
 
   inputValueChange(value: number) {
     this.inputValue.set(Number.isNaN(value) ? 0 : value)
-    console.log(this.outputUnit())
   }
 
 
