@@ -3,7 +3,7 @@
   <div class="app-user-input">
     <label>
       From <br />
-      <input type="number" (change)="inputValueChange($event.target.valueAsNumber)" />
+      <input type="number" (keyup)="inputValueChange($event.target.valueAsNumber)" />
     </label>
     <select #sel (change)="inputUnitChange(sel.value)">
       @for (item of inputCode; track item) {
@@ -13,7 +13,7 @@
   </div>
   <div class="app-convert-output">
     To <br />
-    <span class="app-converted">{{ convertedValue() }}</span>
+    <span class="app-converted">{{ outputValue() }}</span>
     <select #outsel (change)="outputUnitChange(outsel.value)">
       @for (item of outputCode(); track item) {
       <option [selected]="($index == 1 || $index == 0) && item != inputUnit()">{{ item }}</option>
