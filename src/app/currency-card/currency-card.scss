@@ -1,5 +1,5 @@
 .app-card {
-  border: 1px solid rgb(141, 132, 131);
+  border: 3px solid rgb(141, 132, 131);
   margin: 10px 10px 10px 10px;
   border-radius: 10px;
   padding-left: 20px;
@@ -8,4 +8,11 @@
 
 .app-arrow {
   font-size: 30px;
+}
+
+.isUp {
+  border-color: rgb(134, 207, 26);
+}
+.isDown {
+  border-color: rgb(220, 46, 46);
 }
