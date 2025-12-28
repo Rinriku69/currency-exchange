@@ -5,11 +5,12 @@ import { filter, Observable, Subject, takeUntil, timer } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { CurrencyCard } from "../currency-card/currency-card";
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { Converter } from "../converter/converter";
 
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CurrencyCard],
+  imports: [CurrencyCard, Converter],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
 })
