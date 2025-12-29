@@ -7,8 +7,7 @@
 }
 
 .app-arrow {
-  font-size: 30px;
-  display: inline-flex;
+  font-size: 1.2rem;
 }
 
 .isUp {
@@ -16,4 +15,21 @@
 }
 .isDown {
   box-shadow: 0 6px 14px rgb(255, 25, 25);
+}
+.isUp .app-arrow {
+  color: #4ade80;
+}
+
+.isDown .app-arrow {
+  color: #f87171;
+}
+
+.app-card-header {
+  display: flex;
+  align-items: center; /* ให้ตัวอักษรกับลูกศรอยู่ระดับเดียวกัน */
+  gap: 8px;
+}
+
+.app-card h3 {
+  margin: 0;
 }

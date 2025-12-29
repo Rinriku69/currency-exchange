@@ -3,10 +3,13 @@
   class="app-card"
   [ngClass]="{ isUp: currency.trend == 'up', isDown: currency.trend == 'down' }"
 >
-  <h3>{{ currency.currencyCode }}</h3>
-  <span class="app-arrow">
-    @if(currency.trend == 'up'){ ⬆️ }@else if (currency.trend == 'down') { ⬇️ }
-  </span>
+  <div class="app-card-header">
+    <h3>{{ currency.currencyCode }}</h3>
+    <span class="app-arrow">
+      @if(currency.trend == 'up'){ ⬆️ }@else if (currency.trend == 'down') { ⬇️ }
+    </span>
+  </div>
+
   <p>1 USD = {{ currency.rate | number }} {{ currency.currencyCode }}</p>
 </div>
 }
