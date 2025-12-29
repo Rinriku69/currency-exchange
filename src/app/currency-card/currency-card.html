@@ -1,3 +1,4 @@
+@if(currency.currencyCode!=='USD'){
 <div
   class="app-card"
   [ngClass]="{ isUp: currency.trend == 'up', isDown: currency.trend == 'down' }"
@@ -8,3 +9,4 @@
     @if(currency.trend == 'up'){ ⬆️ }@else if (currency.trend == 'down') { ⬇️ }
   </div>
 </div>
+}
