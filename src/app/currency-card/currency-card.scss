@@ -1,18 +1,19 @@
 .app-card {
-  border: 4px solid rgb(141, 132, 131);
-  margin: 10px 10px 10px 10px;
-  border-radius: 10px;
-  padding-left: 20px;
-  background-color: #4988c4;
+  background: #4f89c6;
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin: 20px 20px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
 }
 
 .app-arrow {
   font-size: 30px;
+  display: inline-flex;
 }
 
 .isUp {
-  border-color: rgb(156, 242, 27);
+  box-shadow: 0 6px 14px rgb(156, 242, 27);
 }
 .isDown {
-  border-color: rgb(255, 25, 25);
+  box-shadow: 0 6px 14px rgb(255, 25, 25);
 }

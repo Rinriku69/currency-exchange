@@ -4,9 +4,9 @@
   [ngClass]="{ isUp: currency.trend == 'up', isDown: currency.trend == 'down' }"
 >
   <h3>{{ currency.currencyCode }}</h3>
-  <p>1 USD = {{ currency.rate | number }} {{ currency.currencyCode }}</p>
-  <div class="app-arrow">
+  <span class="app-arrow">
     @if(currency.trend == 'up'){ ⬆️ }@else if (currency.trend == 'down') { ⬇️ }
-  </div>
+  </span>
+  <p>1 USD = {{ currency.rate | number }} {{ currency.currencyCode }}</p>
 </div>
 }
