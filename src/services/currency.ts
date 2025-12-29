@@ -116,15 +116,15 @@ export class Currency {
       map(currency => {
         const trend = this.trendRNG()
         const value = this.valueRNG()
-
+        console.log(trend)
         if (currency.currencyCode == 'USD') {
           return currency
         }
 
         return {
           ...currency,
-          rate: trend === 1 ? currency.rate + value
-            : currency.rate - value
+          rate: (trend === 0) && !(currency.rate - value < 0) ? currency.rate - value
+            : currency.rate + value
         }
       })
 
