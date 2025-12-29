@@ -11,7 +11,8 @@ import { toSignal } from '@angular/core/rxjs-interop';
   styleUrl: './converter.scss',
 })
 export class Converter {
-  currencyState = inject(Currency)
+  myMath = Math;
+  currencyState = inject(Currency);
   dashboard: Signal<DashBoard[]> = toSignal(this.currencyState.CurrentCurrencies$, { initialValue: [] })
   inputCode = this.dashboard().map(currnecy =>
     currnecy.currencyCode

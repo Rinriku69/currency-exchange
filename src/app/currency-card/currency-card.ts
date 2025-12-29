@@ -10,4 +10,5 @@ import { DecimalPipe, NgClass } from '@angular/common';
 })
 export class CurrencyCard {
   @Input() currency!: DashBoard
+  myMath = Math
 }
