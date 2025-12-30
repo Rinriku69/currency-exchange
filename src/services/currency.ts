@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DashBoard } from '../model/dashboard';
 import { BehaviorSubject, Observable, pairwise, map, switchMap, timer, EMPTY, tap, filter, of, combineLatest } from 'rxjs';
+import { Logs } from '../model/logs';
 
 @Injectable({
   providedIn: 'root',
@@ -58,17 +59,38 @@ export class Currency {
     return (inputValue / fromRate) * toRate
 
   }))
-  /* constructor() {
-    this.pollingActive$.pipe(
-      switchMap(isActive => isActive ? timer(0, 5000) : EMPTY)
-    ).subscribe(() => {
-      this.RandomRate();
+
+  private initial_log = [{
+    currencyCode: 'JPY',
+    rate_log: []
+  }, {
+    currencyCode: 'THB',
+    rate_log: []
+  }, {
+    currencyCode: 'EUR',
+    rate_log: []
+  }, {
+    currencyCode: 'CNY',
+    rate_log: []
+  }, {
+    currencyCode: 'KRW',
+    rate_log: []
+  }, {
+    currencyCode: 'SGD',
+    rate_log: []
+  },]
+  private currency_logState = new BehaviorSubject<Logs[]>(this.initial_log);
+
+  currencyLogs$ = this.currency_logState.asObservable();
+  constructor() {
+    this.CurrentCurrencies$.subscribe(currencies => {
+      this.updateLogs(currencies);
     });
-  } */
+  }
 
   updates$ = this.pollingActive$.pipe(
     switchMap(active => active ? timer(1000, 5000) : EMPTY),
-    tap(() => this.RandomRate())
+    tap(() => this.RandomRate(),)
   );
 
   setPolling(isActive: boolean) {
@@ -107,7 +129,29 @@ export class Currency {
         currencyCode: 'USD',
         rate: 1
       }])
+
+      /* this.currency_logState.next([{
+        currencyCode: 'JPY',
+        rate_log: []
+      }, {
+        currencyCode: 'THB',
+        rate_log: []
+      }, {
+        currencyCode: 'EUR',
+        rate_log: []
+      }, {
+        currencyCode: 'CNY',
+        rate_log: []
+      }, {
+        currencyCode: 'KRW',
+        rate_log: []
+      }, {
+        currencyCode: 'SGD',
+        rate_log: []
+      },])*/
     }
+
+
   }
 
   RandomRate() {
@@ -116,7 +160,7 @@ export class Currency {
       map(currency => {
         const trend = this.trendRNG()
         const value = this.valueRNG()
-        console.log(trend)
+
         if (currency.currencyCode == 'USD') {
           return currency
         }
@@ -129,8 +173,22 @@ export class Currency {
       })
 
     this.CurrenciesState.next(new_data)
+
+
   }
 
+  private updateLogs(currencies: DashBoard[]) {
+    const currentLogs = this.currency_logState.value;
+
+    const updatedLogs = currentLogs.map(log => {
+      const newRate = currencies.find(curr => curr.currencyCode == log.currencyCode)?.rate
+      if (newRate == null) { return log }
+      return { ...log, rate_log: [...log.rate_log, newRate].slice(-10) }
+    })
+
+    this.currency_logState.next(updatedLogs);
+    console.log(this.currency_logState.value)
+  }
 
 
 
