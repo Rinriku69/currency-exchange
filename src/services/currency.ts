@@ -187,7 +187,7 @@ export class Currency {
     })
 
     this.currency_logState.next(updatedLogs);
-    console.log(this.currency_logState.value)
+
   }
 
 
