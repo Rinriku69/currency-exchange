@@ -6,7 +6,7 @@
 }@else {
 <h2>Live Status: 🔴Inactive</h2>
 <button (click)="LiveSwitch(true)" class="app-switch">Turn On</button>
-} @for(currency of dashboard() ; track currency.rate){
+} @for(currency of dashboard() ; track currency.currencyCode){
 <app-currency-card
   [currency]="currency"
   [logs]="getCurrencyLog(currency.currencyCode)"
