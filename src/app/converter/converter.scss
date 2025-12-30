@@ -15,9 +15,11 @@
 }
 
 .app-title {
+  font-size: 39px;
   text-align: center;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   color: #bde8f5;
+  margin-bottom: 40px;
 }
 
 .arrow {
@@ -45,4 +47,21 @@ select:hover {
   outline: none;
   border-color: #007bff;
   box-shadow: 0 6px 20px #007bff;
+}
+
+.app-number-input {
+  width: 40%;
+  height: 32px;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: #cce5ec;
+  padding-left: 10px;
+}
+
+.app-converted {
+  font-size: 18px;
+}
+
+.app-box-title {
+  font-size: 19px;
 }

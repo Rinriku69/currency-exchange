@@ -2,11 +2,12 @@ import { Component, computed, effect, inject, Input, signal, Signal } from '@ang
 import { Currency } from '../../services/currency';
 import { DashBoard } from '../../model/dashboard';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { DecimalPipe } from '@angular/common';
 
 
 @Component({
   selector: 'app-converter',
-  imports: [],
+  imports: [DecimalPipe],
   templateUrl: './converter.html',
   styleUrl: './converter.scss',
 })

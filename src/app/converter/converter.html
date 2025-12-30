@@ -2,11 +2,12 @@
 <div class="app-converter-box">
   <div class="app-user-input">
     <label>
-      From <br />
+      <span class="app-box-title">From</span> <br />
       <input
         type="number"
         (keyup)="inputValueChange($event.target.valueAsNumber)"
         (change)="inputValueChange($event.target.valueAsNumber)"
+        class="app-number-input"
       />
     </label>
     <select #sel (change)="UnitChange(sel.value, outsel.value)">
@@ -17,8 +18,8 @@
   </div>
   <div class="arrow">→</div>
   <div class="app-convert-output">
-    To <br />
-    <span class="app-converted">{{ outputValue() }}</span>
+    <span class="app-box-title">To</span> <br />
+    <span class="app-converted">{{ outputValue() | number }}</span>
     <select #outsel (change)="UnitChange(sel.value, outsel.value)">
       @for (item of outputCode(); track item) {
       <option [selected]="$index == 6">{{ item }}</option>
