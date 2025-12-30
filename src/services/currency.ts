@@ -130,25 +130,6 @@ export class Currency {
         rate: 1
       }])
 
-      /* this.currency_logState.next([{
-        currencyCode: 'JPY',
-        rate_log: []
-      }, {
-        currencyCode: 'THB',
-        rate_log: []
-      }, {
-        currencyCode: 'EUR',
-        rate_log: []
-      }, {
-        currencyCode: 'CNY',
-        rate_log: []
-      }, {
-        currencyCode: 'KRW',
-        rate_log: []
-      }, {
-        currencyCode: 'SGD',
-        rate_log: []
-      },])*/
     }
 
 
