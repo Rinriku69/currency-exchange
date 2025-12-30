@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, signal } from '@angular/core';
 import { DashBoard } from '../../model/dashboard';
 import { DecimalPipe, NgClass } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -16,4 +16,13 @@ export class CurrencyCard {
   @Input() logs!: number[];
   myMath = Math
 
+  log_isOpen = signal(false)
+
+  logOpen() {
+    this.log_isOpen.update(v => !v)
+  }
+
+  console() {
+    console.log(this.log_isOpen())
+  }
 }
