@@ -6,13 +6,18 @@
 }
 .app-switch {
   margin-right: 30px;
-  font-size: 15px;
+  font-size: 20px;
   margin-bottom: 20px;
   margin-left: 10px;
   font-weight: bold;
+  border-radius: 5px;
   &:active {
-    box-shadow: 0 10px #504e4e;
+    box-shadow: 3px 5px #2d2c2c;
     transform: translateY(4px);
+  }
+  &:hover {
+    box-shadow: 0 3px 20px #217eff;
+    border-color: #217eff;
   }
 }
 

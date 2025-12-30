@@ -14,9 +14,10 @@ a {
   padding: 10px 10px 10px 10px;
   border-radius: 10px;
   &:hover {
-    background-color: rgb(147, 144, 144);
+    background-color: rgb(142, 144, 204);
+    text-decoration: underline;
   }
-  &.is-active {
+  & .is-active {
     text-decoration: underline;
     background-color: rgb(147, 144, 144);
   }
