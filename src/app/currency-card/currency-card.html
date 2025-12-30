@@ -11,5 +11,10 @@
   </div>
 
   <p>1 USD = {{ currency.rate | number }} {{ currency.currencyCode }}</p>
+  <div>
+    @for(log of logs; track $index){
+    <br />{{ $index + 1 }} {{ log | number }}
+    }
+  </div>
 </div>
 }
