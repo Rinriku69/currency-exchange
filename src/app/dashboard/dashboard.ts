@@ -18,6 +18,7 @@ export class Dashboard {
   private currencyState = inject(Currency);
   dashboard: Signal<DashBoard[]> = toSignal(this.currencyState.CurrentCurrenciesWithTrend$,
     { initialValue: [] })
+  currencyLogs = toSignal(this.currencyState.currencyLogs$, { initialValue: [] })
   private destroyed$ = new Subject<void>;
   private destroyRef = inject(DestroyRef);
   isPolling = signal(false);
@@ -30,5 +31,10 @@ export class Dashboard {
   LiveSwitch(isActive: boolean) {
     this.isPolling.set(isActive)
     this.currencyState.setPolling(isActive);
+  }
+
+  getCurrencyLog(code: string) {
+    const log = this.currencyLogs().find(log => log.currencyCode === code)?.rate_log
+    return log ? log : []
   }
 }
