@@ -15,14 +15,14 @@ export class Converter {
   myMath = Math;
   currencyState = inject(Currency);
   dashboard: Signal<DashBoard[]> = toSignal(this.currencyState.CurrentCurrencies$, { initialValue: [] })
-  inputCode = this.dashboard().map(currnecy =>
+  inputCode = computed(() => this.dashboard().map(currnecy =>
     currnecy.currencyCode
-  )
+  ))
   inputUnit = signal('JPY')
   outputUnit = signal('USD')
   inputValue = signal(0)
-  outputCode: Signal<string[]> = computed(() => {
-    return this.inputCode
+  outputCode = computed(() => {
+    return this.inputCode()
   })
   convertedValue = toSignal(this.currencyState.convertedValue$, { initialValue: 0 })
   outputValue = this.convertedValue() ? this.convertedValue : signal(0)
