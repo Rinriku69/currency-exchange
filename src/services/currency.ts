@@ -1,12 +1,14 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { DashBoard } from '../model/dashboard';
-import { BehaviorSubject, Observable, pairwise, map, switchMap, timer, EMPTY, tap, filter, of, combineLatest } from 'rxjs';
+import { BehaviorSubject, Observable, pairwise, map, switchMap, timer, EMPTY, tap, filter, of, combineLatest, shareReplay } from 'rxjs';
 import { Logs } from '../model/logs';
+import { CurrencyApiService } from './currency-api-service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class Currency {
+  private currencyApi = inject(CurrencyApiService);
   private CurrenciesState = new BehaviorSubject<DashBoard[]>([]);
   CurrentCurrencies$ = this.CurrenciesState.asObservable();
   CurrentCurrenciesWithTrend$ = this.CurrentCurrencies$.pipe(
@@ -34,6 +36,7 @@ export class Currency {
   );
   private pollingActive$ = new BehaviorSubject<boolean>(false);
   toConvert$ = new BehaviorSubject<{ value: number, from: string, to: string }>({ value: 1, from: 'JPY', to: 'USD' })
+  CurrenciesApi$ = this.currencyApi.getCurrencies().pipe(shareReplay(1));
 
   convertedValue$ = combineLatest([this.CurrentCurrencies$,
   this.toConvert$

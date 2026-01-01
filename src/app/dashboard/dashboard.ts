@@ -23,6 +23,7 @@ export class Dashboard {
   private destroyRef = inject(DestroyRef);
   isPolling = signal(false);
   data = toSignal(this.currencyState.updates$);
+  currencyApi = toSignal(this.currencyState.CurrenciesApi$, { initialValue: [] })
 
   constructor() {
     this.currencyState.getDashboard()
